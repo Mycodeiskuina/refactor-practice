@@ -20,16 +20,17 @@ class CalculaGanador:
         votosxcandidato = {}
         for fila in data:
             if not fila[4] in votosxcandidato:
-                votosxcandidato[fila[4]] = 0
+                votosxcandidato[fila[4]] = [fila[4], 0]
             if fila[5] == '1':
-                votosxcandidato[fila[4]] = votosxcandidato[fila[4]] + 1
+                votosxcandidato[fila[4]][1] = votosxcandidato[fila[4]][1] + 1
+        ordenado = sorted(votosxcandidato.items(), key=lambda item:item[1][1], reverse=True)
         for candidato in votosxcandidato:
             print('candidato: ' + candidato + ' votos validos: ' + str(votosxcandidato[candidato]))
-        for candidato in votosxcandidato:
+        for candidato in ordenado:
             return [candidato]
 
 c = CalculaGanador()
-#c.calcularvotos(c.leerdatos())
+print(c.calcularganador(c.leerdatos()))
 datatest = [
 ['Áncash', 'Asunción', 'Acochaca', '40810062', 'Eddie Hinesley', '0'],
 ['Áncash', 'Asunción', 'Acochaca', '57533597', 'Eddie Hinesley', '1'],
