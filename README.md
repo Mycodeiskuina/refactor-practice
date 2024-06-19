@@ -1,5 +1,6 @@
 # refactor-practice
-Practica de refactor
+
+A continuación, se procederá a justificar lo implementado para la tarea:
 
 
 ## Refactorización:
@@ -69,3 +70,10 @@ Nuestro resultado al ejecutar el programa es:
 
 
 Lo cual indica que ella es la ganadora, con más del 50% de votos válidos.
+
+
+
+## Integrantes:
+
+- Virginia Puente
+- Mariana Capuñay 
