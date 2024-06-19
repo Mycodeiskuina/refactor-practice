@@ -6,6 +6,26 @@ class TestCalculaGanador(unittest.TestCase):
     def setUp(self):
         self.cg = CalculaGanador()
 
+
+    def test_leerdatos_csv(self):
+        self.assertEqual(self.cg.leerdatos_csv('2024.csv'), [
+            [
+                'Ancash', 'Asuncion', 'Chacas', '81122156', 'Eddie Hinesley', '1'
+            ]
+        ])
+
+        self.assertEqual(self.cg.leerdatos_csv('test.csv'), [
+            [
+                'Ancash', 'Asuncion', 'Chacas', '20398144', 'Paula Daigle', '1'
+            ],
+            [
+                'Ancash','Asuncion','Chacas','33656332','Aundrea Grace','0'
+            ]
+        ])
+
+        with self.assertRaises(FileNotFoundError, msg=('El archivo 0204_noexiste.csv no existe.')):
+            self.cg.leerdatos_csv('0204_noexiste.csv')
+
     def test_es_dni_valido(self):
         self.assertTrue(self.cg.es_dni_valido("12345678"))
         self.assertFalse(self.cg.es_dni_valido("1234567"))
@@ -14,7 +34,7 @@ class TestCalculaGanador(unittest.TestCase):
 
     def test_calcularganador(self):
 
-        datatest = self.cg.leerdatos()
+        datatest = self.cg.leerdatos_csv()
         self.assertEqual(self.cg.calcularganador(datatest), ['Dennis Reyna', 'Aundrea Grace'])
 
         datatest_2 = [

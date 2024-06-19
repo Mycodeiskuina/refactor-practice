@@ -1,13 +1,18 @@
 import csv
 import re
 from collections import defaultdict
+import os.path
 
 class CalculaGanador:
 
-    def leerdatos(self, filename='0204.csv'):
+    def leerdatos_csv(self, filename='0204.csv'):
         """
         Lee los datos del archivo CSV y devuelve una lista de filas de datos.
         """
+        
+        if not os.path.isfile(filename):
+            raise FileNotFoundError(f'El archivo {filename} no existe.')
+        
         data = []
         with open(filename, 'r') as csvfile:
             next(csvfile)  
@@ -39,16 +44,16 @@ class CalculaGanador:
             return []
 
         # Ordenar los candidatos por número de votos válidos en orden descendente
-        ordenado = sorted(votosxcandidato.items(), key=lambda item: item[1], reverse=True)
+        votos_ordenados = sorted(votosxcandidato.items(), key=lambda item: item[1], reverse=True)
         
         # Verificar si hay un ganador con más del 50% de los votos válidos
-        for candidato, votos in ordenado:
+        for candidato, votos in votos_ordenados:
             #print(candidato, votos)
             if votos > total_votos_validos / 2:
                 return [candidato]
             
         # Si no hay un ganador, retornar los dos candidatos con más votos válidos
-        return [candidato for candidato, votos in ordenado[:2]]
+        return [candidato for candidato, votos in votos_ordenados[:2]]
 
         
 
